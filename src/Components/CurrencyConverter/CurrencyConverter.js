@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
+import './CurrencyConverter.css';
 
 function LineChart({ baseCurrency, selectedCurrency }) {
   const chartRef = useRef(null);
@@ -36,6 +37,7 @@ function LineChart({ baseCurrency, selectedCurrency }) {
         },
         options: {
           responsive: true,
+          aspectRatio: 3,
           title: {
             display: true,
             text: `Exchange Rate: ${baseCurrency} to ${selectedCurrency}`
