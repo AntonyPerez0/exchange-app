@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './CurrencyTable.css'
 
-const CurrencyTable = () => {
+const CurrencyTable = ({ baseCurrency, setBaseCurrency, selectedCurrency, setSelectedCurrency }) => {
   const [currencies, setCurrencies] = useState([])
-  const [baseCurrency, setBaseCurrency] = useState('EUR')
-  const [selectedCurrency, setSelectedCurrency] = useState('USD')
   const [rates, setRates] = useState({})
   const [amount, setAmount] = useState(1)
 
