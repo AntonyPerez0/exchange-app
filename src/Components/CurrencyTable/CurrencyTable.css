@@ -1,0 +1,56 @@
+.table {
+    width: 90%; /* Adjust the width to 90% of the page */
+    height: 50%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: auto;
+    padding: 0 5%; /* Add padding to the left and right */
+}
+
+.table th, .table td {
+    text-align: left; /* Align the content to the left */
+    border: 2px solid steelblue;
+    padding: 20px;
+}
+
+.currency-select {
+    margin: 10px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: steelblue; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.input-number {
+    width: 60px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    font-size: 1em;
+    margin: 10px;
+}
+
+.input-number::-webkit-inner-spin-button,
+.input-number::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-number {
+    -moz-appearance: textfield;
+}

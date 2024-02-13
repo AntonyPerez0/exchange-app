@@ -1,0 +1,27 @@
+.footer {
+    background-color: steelblue;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+/* Make the footer responsive */
+@media (max-width: 600px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer a {
+        margin: 10px 0;
+    }
+}

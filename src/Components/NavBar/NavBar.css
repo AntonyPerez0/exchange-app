@@ -1,0 +1,35 @@
+.navbar {
+    background-color: steelblue;
+    padding: 5px; /* Decrease this value to make the navbar thinner */
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.site-name {
+    font-size: 1em; /* Adjust this value to make the text smaller if necessary */
+    white-space: nowrap; /* This will prevent the text from wrapping */
+    color: white;
+    margin-right: auto;
+}
