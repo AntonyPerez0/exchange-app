@@ -54,3 +54,15 @@ button:hover {
 .input-number {
     -moz-appearance: textfield;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.converted-currency {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+

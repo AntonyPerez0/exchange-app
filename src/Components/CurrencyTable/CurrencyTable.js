@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import Select from 'react-select'
 import './CurrencyTable.css'
 
-const CurrencyTable = ({ baseCurrency, setBaseCurrency, selectedCurrency, setSelectedCurrency }) => {
+const CurrencyTable = ({
+  baseCurrency,
+  setBaseCurrency,
+  selectedCurrency,
+  setSelectedCurrency,
+}) => {
   const [currencies, setCurrencies] = useState([])
   const [rates, setRates] = useState({})
   const [amount, setAmount] = useState(1)
@@ -47,7 +53,11 @@ const CurrencyTable = ({ baseCurrency, setBaseCurrency, selectedCurrency, setSel
       .then((response) => response.json())
       .then((data) => {
         const currencyRates = Object.keys(data.rates)
-        setCurrencies(currencyRates)
+        const formattedCurrencies = currencyRates.map((currency) => ({
+          value: currency,
+          label: `${currency} (${currencySymbols[currency]})`,
+        }))
+        setCurrencies(formattedCurrencies)
         setRates(data.rates)
       })
   }, [baseCurrency])
@@ -57,59 +67,49 @@ const CurrencyTable = ({ baseCurrency, setBaseCurrency, selectedCurrency, setSel
     setSelectedCurrency(baseCurrency)
   }
 
+  const convertedAmount = (amount * rates[selectedCurrency]).toFixed(2)
+
   return (
-    <div>
-      <h2>Current Currency: {baseCurrency}</h2>
-      <h2>
-        Amount: {currencySymbols[baseCurrency]}
-        {amount}
-      </h2>
-      <input
-        className="input-number"
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <select
-        className="currency-select"
-        value={baseCurrency}
-        onChange={(e) => setBaseCurrency(e.target.value)}
-      >
-        {currencies.map((currency) => (
-          <option key={currency} value={currency}>
-            {currency}
-          </option>
-        ))}
-      </select>
-
-      <button onClick={swapCurrencies}>Swap Currencies</button>
-
-      <select
-        className="currency-select"
-        value={selectedCurrency}
-        onChange={(e) => setSelectedCurrency(e.target.value)}
-      >
-        {currencies.map((currency) => (
-          <option key={currency} value={currency}>
-            {currency}
-          </option>
-        ))}
-      </select>
-
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Currency</th>
-            <th>Exchange Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{selectedCurrency}</td>
-            <td>{rates[selectedCurrency] * amount}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="container">
+      <div className="input-output-container">
+        <div className="input-container">
+          <h2>Current Currency: {baseCurrency}</h2>
+          <h2>
+            Amount: {currencySymbols[baseCurrency]}
+            {amount}
+          </h2>
+          <input
+            className="input-number"
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <Select
+            key={baseCurrency}
+            className="currency-select"
+            value={currencies.find((option) => option.value === baseCurrency)}
+            onChange={(option) => setBaseCurrency(option.value)}
+            options={currencies}
+          />
+        </div>
+        <button onClick={swapCurrencies}>Swap Currencies</button>
+        <div className="output-container">
+          <Select
+            key={selectedCurrency}
+            className="currency-select"
+            value={currencies.find(
+              (option) => option.value === selectedCurrency,
+            )}
+            onChange={(option) => setSelectedCurrency(option.value)}
+            options={currencies}
+          />
+          <h2 className="converted-currency">
+            Selected Currency: {selectedCurrency}
+            <br />
+            Converted Amount: {convertedAmount}
+          </h2>
+        </div>
+      </div>
     </div>
   )
 }
