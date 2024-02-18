@@ -73,41 +73,44 @@ const CurrencyTable = ({
     <div className="container">
       <div className="input-output-container">
         <div className="input-container">
-          <h2>Current Currency: {baseCurrency}</h2>
-          <h2>
-            Amount: {currencySymbols[baseCurrency]}
-            {amount}
-          </h2>
-          <input
-            className="input-number"
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <Select
-            key={baseCurrency}
-            className="currency-select"
-            value={currencies.find((option) => option.value === baseCurrency)}
-            onChange={(option) => setBaseCurrency(option.value)}
-            options={currencies}
-          />
+          <div className="currency-info">
+            <h2>Current Currency: {baseCurrency}</h2>
+            <h2>
+              Amount: {currencySymbols[baseCurrency]}
+              {amount}
+            </h2>
+            <input
+              className="input-number"
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <Select
+              key={baseCurrency}
+              className="currency-select"
+              value={currencies.find((option) => option.value === baseCurrency)}
+              onChange={(option) => setBaseCurrency(option.value)}
+              options={currencies}
+            />
+          </div>
         </div>
         <button onClick={swapCurrencies}>Swap Currencies</button>
         <div className="output-container">
-          <Select
-            key={selectedCurrency}
-            className="currency-select"
-            value={currencies.find(
-              (option) => option.value === selectedCurrency,
-            )}
-            onChange={(option) => setSelectedCurrency(option.value)}
-            options={currencies}
-          />
-          <h2 className="converted-currency">
-            Selected Currency: {selectedCurrency}
-            <br />
-            Converted Amount: {convertedAmount}
-          </h2>
+          <div className="currency-info">
+            <h2 className="converted-currency">
+              Selected Currency: {selectedCurrency}
+            </h2>
+            <h2>Converted Amount: {convertedAmount}</h2>
+            <Select
+              key={selectedCurrency}
+              className="currency-select selected-currency-select"
+              value={currencies.find(
+                (option) => option.value === selectedCurrency,
+              )}
+              onChange={(option) => setSelectedCurrency(option.value)}
+              options={currencies}
+            />
+          </div>
         </div>
       </div>
     </div>

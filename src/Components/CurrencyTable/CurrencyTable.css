@@ -1,12 +1,3 @@
-.table {
-    width: 90%; /* Adjust the width to 90% of the page */
-    height: 50%;
-    margin: 0 auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    overflow: auto;
-    padding: 0 5%; /* Add padding to the left and right */
-}
 
 .table th, .table td {
     text-align: left; /* Align the content to the left */
@@ -16,7 +7,13 @@
 
 .currency-select {
     margin: 10px;
-    padding: 5px;
+    padding: 0px;
+    font-size: 1em;
+}
+
+.selected-currency-select {
+    margin: 10px;
+    padding: 65px 0 0 0;
     font-size: 1em;
 }
 
@@ -39,7 +36,7 @@ button:hover {
 }
 
 .input-number {
-    width: 60px; /* Adjust the width as needed */
+    width: 200px; /* Adjust the width as needed */
     height: 30px; /* Adjust the height as needed */
     font-size: 1em;
     margin: 10px;
@@ -55,14 +52,34 @@ button:hover {
     -moz-appearance: textfield;
 }
 
-.container {
+.input-output-container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.converted-currency {
-    padding: 10px;
-    font-size: 1.2em;
+.input-container, .output-container {
+    width: 40%;
 }
 
+button {
+    width: 10%;
+}
+
+
+@media (max-width: 600px) {
+    .input-output-container {
+        flex-direction: column;
+    }
+
+    .input-container, .output-container, button {
+        width: 100%;
+    }
+
+    .currency-info {
+        text-align: center;
+    }
+}
 

@@ -1,8 +1,9 @@
 .navbar {
     background-color: steelblue;
-    padding: 5px; /* Decrease this value to make the navbar thinner */
+    padding: 5px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .nav-menu {
@@ -28,8 +29,9 @@
 }
 
 .site-name {
-    font-size: 1em; /* Adjust this value to make the text smaller if necessary */
-    white-space: nowrap; /* This will prevent the text from wrapping */
-    color: white;
-    margin-right: auto;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 2em;
+    color: rgba(255, 245, 0, 0.84);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
 }
