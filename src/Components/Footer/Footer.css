@@ -3,16 +3,17 @@
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     position: fixed;
     bottom: 0;
     width: 100%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .footer a {
-    color: white;
-    margin: 0 15px;
+    margin: 0 100px; /* Reduce this value as needed */
     text-decoration: none;
+    color: white;
 }
 
 /* Make the footer responsive */
