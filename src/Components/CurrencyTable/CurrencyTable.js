@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Select from 'react-select'
 import './CurrencyTable.css'
 
@@ -12,47 +12,49 @@ const CurrencyTable = ({
   const [rates, setRates] = useState({})
   const [amount, setAmount] = useState(1)
 
-  const currencySymbols = {
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-    JPY: '¥',
-    AUD: 'A$',
-    CAD: 'C$',
-    CHF: 'Fr.',
-    CNY: '¥',
-    SEK: 'kr',
-    NZD: 'NZ$',
-    BGN: 'лв',
-    BRL: 'R$',
-    CZK: 'Kč',
-    DKK: 'kr',
-    HKD: 'HK$',
-    HRK: 'kn',
-    HUF: 'Ft',
-    IDR: 'Rp',
-    ILS: '₪',
-    INR: '₹',
-    ISK: 'kr',
-    KRW: '₩',
-    MXN: '$',
-    MYR: 'RM',
-    NOK: 'kr',
-    PHP: '₱',
-    PLN: 'zł',
-    RON: 'lei',
-    RUB: '₽',
-    SGD: 'S$',
-    THB: '฿',
-    TRY: '₺',
-    ZAR: 'R',
-  }
+  const currencySymbols = useMemo(() => {
+    return {
+      USD: '$',
+      EUR: '€',
+      GBP: '£',
+      JPY: '¥',
+      AUD: 'A$',
+      CAD: 'C$',
+      CHF: 'Fr.',
+      CNY: '¥',
+      SEK: 'kr',
+      NZD: 'NZ$',
+      BGN: 'лв',
+      BRL: 'R$',
+      CZK: 'Kč',
+      DKK: 'kr',
+      HKD: 'HK$',
+      HRK: 'kn',
+      HUF: 'Ft',
+      IDR: 'Rp',
+      ILS: '₪',
+      INR: '₹',
+      ISK: 'kr',
+      KRW: '₩',
+      MXN: '$',
+      MYR: 'RM',
+      NOK: 'kr',
+      PHP: '₱',
+      PLN: 'zł',
+      RON: 'lei',
+      RUB: '₽',
+      SGD: 'S$',
+      THB: '฿',
+      TRY: '₺',
+      ZAR: 'R',
+    };
+  }, []);
 
   useEffect(() => {
     fetch(`https://api.frankfurter.app/latest?from=${baseCurrency}`)
       .then((response) => response.json())
       .then((data) => {
-        const currencyRates = Object.keys(data.rates)
+        const currencyRates = Object.keys(currencySymbols) // Use all symbols, not just the ones from the API
         const formattedCurrencies = currencyRates.map((currency) => ({
           value: currency,
           label: `${currency} (${currencySymbols[currency]})`,
@@ -60,14 +62,17 @@ const CurrencyTable = ({
         setCurrencies(formattedCurrencies)
         setRates(data.rates)
       })
-  }, [baseCurrency])
+  }, [baseCurrency, currencySymbols]) // Add currencySymbols to the dependency array
 
   const swapCurrencies = () => {
-    setBaseCurrency(selectedCurrency)
-    setSelectedCurrency(baseCurrency)
+    if (baseCurrency !== selectedCurrency) {
+      setBaseCurrency(selectedCurrency)
+      setSelectedCurrency(baseCurrency)
+    }
   }
 
-  const convertedAmount = (amount * rates[selectedCurrency]).toFixed(2)
+  const conversionRate = baseCurrency === selectedCurrency ? 1 : rates[selectedCurrency];
+  const convertedAmount = (amount * conversionRate).toFixed(2);
 
   return (
     <div className="container">
