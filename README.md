@@ -15,7 +15,7 @@ Currency Converter is a web application built with React that allows users to co
 
 ## Installation
 
-1. Clone the repo
+1. link to the website in action
    ```sh
-   git clone https://github.com/AntonyPerez0/CurrencyConverter.git
+   https://papaya-mousse-fc275b.netlify.app/
 
